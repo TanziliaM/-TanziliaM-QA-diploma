@@ -24,14 +24,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.0'
-    testImplementation 'com.codeborne:selenide:5.24.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'com.codeborne:selenide:5.24.4'
     testImplementation 'mysql:mysql-connector-java:8.0.25'
-    testImplementation 'org.postgresql:postgresql:42.2.10'
+    testImplementation 'org.postgresql:postgresql:42.2.24.jre7'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'io.rest-assured:rest-assured:4.4.0'
     testImplementation 'com.google.code.gson:gson:2.8.8'
-    testImplementation 'io.qameta.allure:allure-selenide:2.15.0'
+    testImplementation 'io.qameta.allure:allure-selenide:2.13.0'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
 
 
