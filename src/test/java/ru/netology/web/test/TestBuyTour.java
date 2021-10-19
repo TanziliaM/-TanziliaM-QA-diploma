@@ -1,7 +1,7 @@
 package ru.netology.web.test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
-import com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping;
+
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
 import org.junit.jupiter.api.*;
@@ -10,7 +10,6 @@ import ru.netology.web.data.Sql;
 import ru.netology.web.page.DashboardPage;
 
 
-import java.sql.SQLDataException;
 import java.sql.SQLException;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -38,6 +37,7 @@ public class TestBuyTour {
         clearDBTables();
     }
 
+
     @Test
     @DisplayName("1. Покупка тура с валидными данными")
     void tourPurchaseShouldCorrect() throws SQLException {
@@ -64,7 +64,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("3. Отправка формы с незаполненным полем Номер карты")
-    void tourShouldNotPurchaseWithoutNumber () {
+    void tourShouldNotPurchaseWithoutNumber () throws SQLException{
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -75,7 +75,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("4. Отправка формы с незаполненным полем Месяц")
-    void tourShouldNotPurchaseWithoutMonth () {
+    void tourShouldNotPurchaseWithoutMonth () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -86,7 +86,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("5. Отправка формы с незаполненным полем Год")
-    void tourShouldNotPurchaseWithoutYear () {
+    void tourShouldNotPurchaseWithoutYear () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -97,7 +97,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("6. Отправка формы с незаполненным полем Владелец")
-    void tourShouldNotPurchaseWithoutHolder () {
+    void tourShouldNotPurchaseWithoutHolder () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -108,7 +108,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("7. Отправка формы с незаполненным полем CVC/CVV")
-    void tourShouldNotPurchaseWithoutCVC () {
+    void tourShouldNotPurchaseWithoutCVC () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -119,7 +119,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("8. Отправка пустой формы")
-    void tourShouldNotPurchaseWithoutAll ()  {
+    void tourShouldNotPurchaseWithoutAll () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -138,7 +138,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("9. Отправка формы с с невалидным значением \"Номера карты\" (14 знаков)")
-    void tourShouldNotPurchaseWithIncorrectNumber ()  {
+    void tourShouldNotPurchaseWithIncorrectNumber () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -149,7 +149,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("10. Отправка формы с с невалидным значением \"Месяца\" (число больше 12)")
-    void tourShouldNotPurchaseWithIncorrectMonth ()  {
+    void tourShouldNotPurchaseWithIncorrectMonth () throws SQLException  {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -160,7 +160,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("11. Отправка формы с  невалидным значением \"Год\" (число меньше 20)")
-    void tourShouldNotPurchaseWithIncorrectYear () {
+    void tourShouldNotPurchaseWithIncorrectYear () throws SQLException{
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -171,7 +171,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("12. Отправка формы с невалидным значением в поле CVC/CVV (2 знака)")
-    void tourShouldNotPurchaseWithIncorrectCVC () {
+    void tourShouldNotPurchaseWithIncorrectCVC () throws SQLException{
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -182,7 +182,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("13. Отправка формы с полем Владелец, заполненным кириллицей")
-    void tourShouldNotPurchaseWithIncorrectHolder ()  {
+    void tourShouldNotPurchaseWithIncorrectHolder () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -217,7 +217,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("16. Покупка тура в кредит. Отправка формы с незаполненным полем Номер карты")
-    void tourShouldNotPurchaseByCreditWithoutNumber () {
+    void tourShouldNotPurchaseByCreditWithoutNumber ()throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -228,7 +228,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("17. Покупка тура в кредит. Отправка формы с незаполненным полем Месяц")
-    void tourShouldNotPurchaseByCreditWithoutMonth ()  {
+    void tourShouldNotPurchaseByCreditWithoutMonth () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -239,7 +239,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("18. Покупка тура в кредит. Отправка формы с незаполненным полем Год")
-    void tourShouldNotPurchaseByCreditWithoutYear ()  {
+    void tourShouldNotPurchaseByCreditWithoutYear () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -250,7 +250,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("19. Покупка тура в кредит. Отправка формы с незаполненным полем Владелец")
-    void tourShouldNotPurchaseByCreditWithoutHolder ()  {
+    void tourShouldNotPurchaseByCreditWithoutHolder () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -261,7 +261,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("20. Покупка тура в кредит. Отправка формы с незаполненным полем CVC/CVV")
-    void tourShouldNotPurchaseByCreditWithoutCVC ()  {
+    void tourShouldNotPurchaseByCreditWithoutCVC () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -272,7 +272,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("21. Покупка тура в кредит. Отправка пустой формы")
-    void tourShouldNotPurchaseByCreditWithoutAll () {
+    void tourShouldNotPurchaseByCreditWithoutAll ()throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -291,7 +291,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("22. Покупка тура в кредит. Отправка формы с с невалидным значением \"Номера карты\" (14 знаков)")
-    void tourShouldNotPurchaseByCreditWithIncorrectNumber ()  {
+    void tourShouldNotPurchaseByCreditWithIncorrectNumber ()throws SQLException  {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -302,7 +302,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("23. Покупка тура в кредит. Отправка формы с с невалидным значением \"Месяца\" (число больше 12)")
-    void tourShouldNotPurchaseByCreditWithIncorrectMonth ()  {
+    void tourShouldNotPurchaseByCreditWithIncorrectMonth () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -313,7 +313,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("24. Покупка тура в кредит. Отправка формы с  невалидным значением \"Год\" (число меньше 20)")
-    void tourShouldNotPurchaseByCreditWithIncorrectYear () {
+    void tourShouldNotPurchaseByCreditWithIncorrectYear () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -324,7 +324,7 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("25. Покупка тура в кредит. Отправка формы с невалидным значением в поле CVC/CVV (2 знака)")
-    void tourShouldNotPurchaseByCreditWithIncorrectCVC () {
+    void tourShouldNotPurchaseByCreditWithIncorrectCVC () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
@@ -335,11 +335,11 @@ public class TestBuyTour {
 
     @Test
     @DisplayName("26. Покупка тура в кредит. Отправка формы с полем Владелец, заполненным кириллицей")
-    void tourShouldNotPurchaseByCreditWithIncorrectHolder () {
+    void tourShouldNotPurchaseByCreditWithIncorrectHolder () throws SQLException {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToCreditPage();
         val approvedCard = CardInfo.getApprovedCard();
-        approvedCard.setHolder("Ио Ким");
+        approvedCard.setHolder("Иван Иванов");
         dashboardPage.validBuy(approvedCard);
         dashboardPage.assertMessageOfIncorrectInputHolder("Неверный формат");
     }

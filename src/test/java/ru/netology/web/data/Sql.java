@@ -1,18 +1,23 @@
 package ru.netology.web.data;
 
+
 import lombok.Value;
 import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
+
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 
 @Value
 public class Sql {
     private static final String url = System.getProperty("db.url");
     private static final String user = "app";
     private static final String password = "pass";
+    private static Connection conn;
 
     public static String getStatusPurchase() throws SQLException {
         QueryRunner runner = new QueryRunner();
@@ -23,6 +28,7 @@ public class Sql {
             return status.getStatus();
         }
     }
+
 
     public static String getTransactionIdFromPaymentEntity() throws SQLException {
         QueryRunner runner = new QueryRunner();
@@ -39,7 +45,7 @@ public class Sql {
         try (val conn = DriverManager.getConnection(url, user, password)
         ) {
             val selectOrderEntity = "SELECT payment_id, credit_id FROM order_entity  LIMIT 1;";
-            return runner.query(conn, selectOrderEntity, new BeanHandler<OrderEntity>(OrderEntity.class));
+            return runner.query(conn, selectOrderEntity, new BeanHandler<>(OrderEntity.class));
         }
     }
 
@@ -65,13 +71,12 @@ public class Sql {
 
     public static void clearDBTables() throws SQLException {
         val runner = new QueryRunner();
-        try (val conn = DriverManager.getConnection(url, user, password)
-        ) {
-            runner.update(conn, "DELETE  FROM credit_request_entity;");
-            runner.update(conn, "DELETE  FROM payment_entity;");
-            runner.update(conn, "DELETE  FROM order_entity;");
+        try (val conn = DriverManager.getConnection(url, user,password)) {
+            runner.update(conn, "DELETE FROM credit_request_entity;");
+            runner.update(conn, "DELETE FROM order_entity;");
+            runner.update(conn, "DELETE FROM payment_entity;");
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
     }
 }
