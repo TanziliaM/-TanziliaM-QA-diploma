@@ -6,9 +6,9 @@ plugins {
 
 allure {
     autoconfigure = true
-    version = '2.13.3'
+    version = '2.16.1'
     useJUnit5 {
-        version = '2.13.3'
+        version = '2.16.1'
     }
 }
 
@@ -26,11 +26,12 @@ repositories {
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    testImplementation 'com.codeborne:selenide:5.24.4'
+    testImplementation 'com.codeborne:selenide:6.0.3'
     testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.32'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
     testImplementation 'mysql:mysql-connector-java:8.0.25'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
-    testImplementation 'io.qameta.allure:allure-selenide:2.15.0'
+    testImplementation 'io.qameta.allure:allure-selenide:2.14.0'
     testImplementation 'io.rest-assured:rest-assured:4.4.0'
     testImplementation 'org.postgresql:postgresql:42.2.24.jre7'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
@@ -45,7 +46,6 @@ test {
     systemProperty 'sut.url', System.getProperty('sut.url', 'http://localhost:8080')
 }
 
-configurations {
-    testCompile
-}
+
+
 

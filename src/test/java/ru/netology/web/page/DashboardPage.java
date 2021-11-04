@@ -5,6 +5,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.netology.web.data.CardInfo;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -31,36 +33,37 @@ public class DashboardPage {
     SelenideElement paymentOkWindow = $(".notification_status_ok");
     SelenideElement paymentErrorWindow = $(".notification_status_error");
 
-    public DashboardPage validBuy (CardInfo card) {
+    public void validBuy (CardInfo card) {
         numberCard.setValue(card.number);
         month.setValue(card.month);
         year.setValue(card.year);
         holder.setValue(card.holder);
         cvc.setValue(card.cvc);
         continueButton.click();
-        return new DashboardPage();
+        new DashboardPage();
     }
 
-    public PaymentPage goToPaymentPage() {
+    public void goToPaymentPage() {
         pushButtonBuy.click();
-        return new PaymentPage();
+        new PaymentPage();
     }
 
-    public CreditPage goToCreditPage() {
+    public void goToCreditPage() {
         pushButtonCredit.click();
-        return new CreditPage();
+        new CreditPage();
     }
 
 
     public DashboardPage() {
         heading.shouldBe(visible);
     }
+
     public void assertSuccessfulPurchaseMessage() {
-        paymentOkWindow.waitUntil(Condition.visible, 15000);
+        paymentOkWindow.shouldHave(visible, Duration.ofDays(15000));
     }
 
     public void assertNotSuccessfulPurchaseMessage() {
-        paymentErrorWindow.waitUntil(Condition.visible, 15000);
+        paymentErrorWindow.shouldHave(Condition.visible, Duration.ofDays(15000));
     }
 
     public void assertMessageOfIncorrectInputCard(String message) {

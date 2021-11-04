@@ -23,7 +23,7 @@ public class Sql {
         QueryRunner runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user, password)
         ) {
-            val selectStatus = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1;";
+            val selectStatus = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1;create table payment_entity(	status int null,	created int null);";
             val status = runner.query(conn, selectStatus, new BeanHandler<>(PaymentEntity.class));
             return status.getStatus();
         }
@@ -34,7 +34,7 @@ public class Sql {
         QueryRunner runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user, password)
         ) {
-            val selectSql = "SELECT transaction_id FROM payment_entity ORDER BY created DESC LIMIT 1;";
+            val selectSql = "SELECT transaction_id FROM payment_entity ORDER BY created DESC LIMIT 1;create table payment_entity(	transaction_id int null,	created int null);";
             val status = runner.query(conn, selectSql, new BeanHandler<>(PaymentEntity.class));
             return status.getTransaction_id();
         }
@@ -44,7 +44,7 @@ public class Sql {
         QueryRunner runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user, password)
         ) {
-            val selectOrderEntity = "SELECT payment_id, credit_id FROM order_entity  LIMIT 1;";
+            val selectOrderEntity = "SELECT payment_id, credit_id FROM order_entity  LIMIT 1;create table order_entity(	payment_id int null,	credit_id int null);";
             return runner.query(conn, selectOrderEntity, new BeanHandler<>(OrderEntity.class));
         }
     }
@@ -53,7 +53,7 @@ public class Sql {
         QueryRunner runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user, password)
         ) {
-            val selectStatus = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
+            val selectStatus = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1;create table credit_request_entity(	status int null,	created int null);";
             val status = runner.query(conn, selectStatus, new BeanHandler<>(CreditRequestEntity.class));
             return status.getStatus();
         }
@@ -63,7 +63,7 @@ public class Sql {
         QueryRunner runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user, password)
         ) {
-            val selectStatus = "SELECT bank_id FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
+            val selectStatus = "SELECT bank_id FROM credit_request_entity ORDER BY created DESC LIMIT 1;create table credit_request_entity(	bank_id int null,	created int null);";
             val status = runner.query(conn, selectStatus, new BeanHandler<>(CreditRequestEntity.class));
             return status.getBank_id();
         }
@@ -72,9 +72,9 @@ public class Sql {
     public static void clearDBTables() throws SQLException {
         val runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user,password)) {
-            runner.update(conn, "DELETE FROM credit_request_entity;");
-            runner.update(conn, "DELETE FROM order_entity;");
-            runner.update(conn, "DELETE FROM payment_entity;");
+            runner.update(conn, "DELETE FROM credit_request_entity");
+            runner.update(conn, "DELETE FROM order_entity");
+            runner.update(conn, "DELETE FROM payment_entity");
         } catch (SQLException e) {
             e.printStackTrace();
         }
