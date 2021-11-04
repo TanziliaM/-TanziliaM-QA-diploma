@@ -11,7 +11,7 @@
 
 ### % успешных/не успешных - 27%/73%
 
-https://drive.google.com/drive/folders/1vwkiPn4nh0N_0fvF5OM7x_qXiN2dBSvg
+![alt tag](https://github.com/TanziliaM/-TanziliaM-QA-diploma/blob/master/docs/Screenshot_9.jpg)
 
 ## Общие рекомендации
 * Создать документацию по работе с веб-сервисом.
