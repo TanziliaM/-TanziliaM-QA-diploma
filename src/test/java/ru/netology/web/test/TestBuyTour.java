@@ -211,6 +211,7 @@ public class TestBuyTour {
         val approvedCard = CardInfo.getDeclinedCard();
         dashboardPage.validBuy(approvedCard);
         dashboardPage.assertNotSuccessfulPurchaseMessage();
+        dashboardPage.assertMessageOfIncorrectInputMonth("Неверный формат");
         assertEquals(Sql.getStatusPurchaseByCredit(), "DECLINED");
         assertEquals(Sql.getDataFromOrderEntity().getCredit_id(), Sql.getBankIdFromPaymentEntity());
     }

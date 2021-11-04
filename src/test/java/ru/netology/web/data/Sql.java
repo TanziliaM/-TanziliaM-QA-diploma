@@ -69,7 +69,7 @@ public class Sql {
         }
     }
 
-    public static void clearDBTables() throws SQLException {
+    public static void clearDBTables() {
         val runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user,password)) {
             runner.update(conn, "DELETE FROM credit_request_entity");
