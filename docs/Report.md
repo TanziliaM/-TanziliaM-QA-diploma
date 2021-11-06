@@ -7,12 +7,12 @@
 Тестирование проведено для двух БД - MySQL и PostgreSQL.
 
 ## Количество тест-кейсов
-Выполнено 26 тест-кейсов: из которых 19 - не пройденных, 7 - пройденных.
+Выполнено 26 тест-кейсов: из которых 17 - не пройденных, 9 - пройденных.
 
-### % успешных/не успешных - 27%/73%
+### % успешных/не успешных - 34,61%/65,38%
 
 ![alt tag](https://github.com/TanziliaM/-TanziliaM-QA-diploma/blob/master/docs/allure/Screenshot_9.jpg)
-![alt tag](https://github.com/TanziliaM/-TanziliaM-QA-diploma/blob/master/docs/allure/Screenshot.jpg)
+![alt tag](https://github.com/TanziliaM/-TanziliaM-QA-diploma/blob/master/docs/allure/Screenshot_1.jpg)
 
 ## Общие рекомендации
 * Создать документацию по работе с веб-сервисом.
