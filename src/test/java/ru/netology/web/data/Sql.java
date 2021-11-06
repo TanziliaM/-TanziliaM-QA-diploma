@@ -1,6 +1,5 @@
 package ru.netology.web.data;
 
-
 import lombok.Value;
 import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;
@@ -14,9 +13,9 @@ import java.sql.SQLException;
 
 @Value
 public class Sql {
-    private static final String url = System.getProperty("db.url");
-    private static final String user = "app";
-    private static final String password = "pass";
+    static String url = System.getProperty("db.url");
+    static String user = System.getProperty("db.user");
+    static String password = System.getProperty("db.password");
     private static Connection conn;
 
     public static String getStatusPurchase() throws SQLException {

@@ -1,14 +1,12 @@
 package ru.netology.web.test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
-
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
 import org.junit.jupiter.api.*;
 import ru.netology.web.data.CardInfo;
 import ru.netology.web.data.Sql;
 import ru.netology.web.page.DashboardPage;
-
 
 import java.sql.SQLException;
 
@@ -44,11 +42,10 @@ public class TestBuyTour {
         val dashboardPage = new DashboardPage();
         dashboardPage.goToPaymentPage();
         val approvedCard = CardInfo.getApprovedCard();
-        dashboardPage.validBuy (approvedCard);
+        dashboardPage.validBuy(approvedCard);
         dashboardPage.assertSuccessfulPurchaseMessage();
-        assertEquals(Sql.getStatusPurchase(), "APPROVED");
-        assertEquals(Sql.getDataFromOrderEntity().getPayment_id(), Sql.getTransactionIdFromPaymentEntity());
     }
+
     @Test
     @DisplayName("2. Покупка тура с невалидными данными")
     void tourPurchaseShouldUncorrected() throws SQLException {
@@ -199,8 +196,6 @@ public class TestBuyTour {
         val approvedCard = CardInfo.getApprovedCard();
         dashboardPage.validBuy(approvedCard);
         dashboardPage.assertSuccessfulPurchaseMessage();
-        assertEquals(Sql.getStatusPurchaseByCredit(), "APPROVED");
-        assertEquals(Sql.getBankIdFromPaymentEntity(), Sql.getDataFromOrderEntity().getCredit_id());
     }
 
     @Test
